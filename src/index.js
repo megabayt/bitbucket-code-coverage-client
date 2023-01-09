@@ -25,7 +25,7 @@ module.exports = async ({url, auth, commit, file, basePath, debug}) => {
 
     console.log(`Sending request`)
     try {
-        await rp({
+        const result = await rp({
             method: 'POST',
             url: `${url}/rest/code-coverage/1.0/commits/${commit}`,
             headers: {
@@ -35,6 +35,8 @@ module.exports = async ({url, auth, commit, file, basePath, debug}) => {
             body: JSON.stringify(payload),
             timeout: 60000
         })
+
+        console.log(`Request result: `, result);
     } catch (e) {
         console.error(`ERROR: ${e.message}`)
     }
